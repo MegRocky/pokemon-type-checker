@@ -1,4 +1,5 @@
 import StrengthsGrid from "./StrengthsGrid";
+import WeaknessGrid from "./WeaknessGrid";
 
 function PokemonDetails({ currentPokemonDetails }) {
   return (
@@ -8,7 +9,12 @@ function PokemonDetails({ currentPokemonDetails }) {
       <img
         src={`src/assets/${currentPokemonDetails.types[0].type.name}.png`}
       ></img>
-      <StrengthsGrid types={currentPokemonDetails.types}></StrengthsGrid>
+      <StrengthsGrid
+        currentPokemonDetails={currentPokemonDetails}
+      ></StrengthsGrid>
+      <WeaknessGrid
+        currentPokemonDetails={currentPokemonDetails}
+      ></WeaknessGrid>
     </>
   );
 }

@@ -5,14 +5,12 @@ function NameSearch({ setCurrentPokemonName, currentPokemonName }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputName, "in submit handler");
     setCurrentPokemonName(inputName);
     setInputName("");
   };
 
   const inputHandler = (e) => {
     setInputName(e.target.value);
-    console.log(inputName, "in input handler");
   };
 
   return (

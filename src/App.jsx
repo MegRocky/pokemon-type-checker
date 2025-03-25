@@ -12,7 +12,6 @@ function App() {
   useEffect(() => {
     if (currentPokemonName.length > 0) {
       getPokemonDetails(currentPokemonName).then((response) => {
-        console.log(response);
         return setCurrentPokemonDetails(response);
       });
     }

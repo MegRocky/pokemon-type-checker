@@ -10,8 +10,8 @@ export const getPokemonDetails = (pokemonName) => {
   });
 };
 
-export const getTypeDetails = (pokemonName) => {
-  return pokeApi.get(`/pokemon/${pokemonName}`).then((res) => {
+export const getTypeDetails = (typeName) => {
+  return pokeApi.get(`/type/${typeName}`).then((res) => {
     return res.data;
   });
 };

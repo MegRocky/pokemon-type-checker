@@ -1,4 +1,4 @@
-function InteractionsGrid() {
+function InteractionsGrid({ interaction }) {
   return <></>;
 }
 
