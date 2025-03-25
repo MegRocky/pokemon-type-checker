@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTypeDetails } from "../api";
 import TypeCard from "./TypeCard";
+import InteractionsGrid from "./InteractionsGrid";
 
 function StrengthsGrid({ currentPokemonDetails }) {
   const type = currentPokemonDetails.types[0].type.name;
@@ -9,24 +10,17 @@ function StrengthsGrid({ currentPokemonDetails }) {
 
   useEffect(() => {
     getTypeDetails(type).then((response) => {
-      console.log(response);
       return setDoubleDamageTo(response.damage_relations.double_damage_to);
     });
-  }, [type]);
-  return (
+  }, []);
+
+  return doubleDamageTo.length > 0 ? (
     <>
       <p>{type} deals double damage to:</p>
-      <section className="type-grid">
-        {doubleDamageTo.map((damagedType) => {
-          return (
-            <TypeCard
-              typeName={damagedType.name}
-              key={damagedType.name}
-            ></TypeCard>
-          );
-        })}
-      </section>
+      <InteractionsGrid interaction={doubleDamageTo}></InteractionsGrid>
     </>
+  ) : (
+    <></>
   );
 }
 export default StrengthsGrid;

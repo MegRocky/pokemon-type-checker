@@ -1,3 +1,6 @@
+import HalfDamageFromGrid from "./HalfDamageFromGrid";
+import HalfDamageToGrid from "./HalfDamageToGrid";
+import ImmunityGrid from "./ImmunityGrid";
 import StrengthsGrid from "./StrengthsGrid";
 import WeaknessGrid from "./WeaknessGrid";
 
@@ -9,12 +12,21 @@ function PokemonDetails({ currentPokemonDetails }) {
       <img
         src={`src/assets/${currentPokemonDetails.types[0].type.name}.png`}
       ></img>
+      <ImmunityGrid
+        currentPokemonDetails={currentPokemonDetails}
+      ></ImmunityGrid>
       <StrengthsGrid
         currentPokemonDetails={currentPokemonDetails}
       ></StrengthsGrid>
       <WeaknessGrid
         currentPokemonDetails={currentPokemonDetails}
       ></WeaknessGrid>
+      <HalfDamageToGrid
+        currentPokemonDetails={currentPokemonDetails}
+      ></HalfDamageToGrid>
+      <HalfDamageFromGrid
+        currentPokemonDetails={currentPokemonDetails}
+      ></HalfDamageFromGrid>
     </>
   );
 }
