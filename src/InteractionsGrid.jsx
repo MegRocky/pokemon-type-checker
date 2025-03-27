@@ -1,6 +1,7 @@
 import TypeCard from "./TypeCard";
 
 function InteractionsGrid({ interaction }) {
+  console.log(interaction);
   return (
     <>
       {interaction.length > 0 ? (
