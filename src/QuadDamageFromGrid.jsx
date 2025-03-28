@@ -22,18 +22,20 @@ function QuadDamageFromGrid({ currentPokemonDetails }) {
         })
       );
     });
-  }, []);
+  }, [currentPokemonDetails]);
   for (let type of doubleDamageFromFirst) {
     if (doubleDamageFromSecond.includes(type)) {
       quadDamageFrom.push({ name: type });
     }
   }
 
-  return (
+  return quadDamageFrom.length ? (
     <>
       <p> takes 4x damage from:</p>
       <InteractionsGrid interaction={quadDamageFrom}></InteractionsGrid>
     </>
+  ) : (
+    ""
   );
 }
 export default QuadDamageFromGrid;
