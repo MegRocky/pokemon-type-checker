@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useEffect } from "react";
 import "./App.css";
 import NameSearch from "./NameSearch";
-import { getPokemonDetails } from "../api";
+import { getPokemonDetails, getTypeDetails } from "../api";
 import PokemonDetails from "./PokemonDetails";
-import StrengthsGrid from "./StrengthsGrid";
 
 function App() {
   const [currentPokemonName, setCurrentPokemonName] = useState("");
   const [currentPokemonDetails, setCurrentPokemonDetails] = useState({});
+
   useEffect(() => {
     if (currentPokemonName.length > 0) {
       getPokemonDetails(currentPokemonName).then((response) => {
@@ -16,6 +16,7 @@ function App() {
       });
     }
   }, [currentPokemonName]);
+
   return (
     <>
       <NameSearch
