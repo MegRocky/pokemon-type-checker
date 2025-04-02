@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     if (currentPokemonName.length > 0) {
       getPokemonDetails(currentPokemonName).then((response) => {
-        return setCurrentPokemonDetails(response);
+        setCurrentPokemonDetails(response);
       });
     }
   }, [currentPokemonName]);
@@ -27,6 +27,7 @@ function App() {
         <>
           <PokemonDetails
             currentPokemonDetails={currentPokemonDetails}
+            currentPokemonName={currentPokemonName}
           ></PokemonDetails>
         </>
       ) : (

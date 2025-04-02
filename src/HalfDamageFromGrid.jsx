@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import { getTypeDetails } from "../api";
-import TypeCard from "./TypeCard";
 import InteractionsGrid from "./InteractionsGrid";
-function HalfDamageFromGrid({ currentPokemonDetails }) {
-  const type = currentPokemonDetails.types[0].type.name;
-
+function HalfDamageFromGrid({ damageRelations }) {
   const [halfDamageFrom, setHalfDamageFrom] = useState([]);
-
   useEffect(() => {
-    getTypeDetails(type).then((response) => {
-      return setHalfDamageFrom(response.damage_relations.half_damage_from);
-    });
-  }, [type]);
+    const dmgArr = [];
+    for (let type in damageRelations) {
+      if (damageRelations[type] === -2) {
+        dmgArr.push(type);
+      }
+    }
+    setHalfDamageFrom(dmgArr);
+  }, [damageRelations]);
+
   return halfDamageFrom.length > 0 ? (
     <>
       <>
-        <p>{type} takes half damage from:</p>
+        <p>takes 1/2 damage from:</p>
         <InteractionsGrid interaction={halfDamageFrom}></InteractionsGrid>
       </>
     </>

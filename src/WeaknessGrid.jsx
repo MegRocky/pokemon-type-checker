@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
-import { getTypeDetails } from "../api";
 import InteractionsGrid from "./InteractionsGrid";
-function WeaknessGrid({ currentPokemonDetails }) {
-  const type = currentPokemonDetails.types[0].type.name;
-
-  const [doubleDamageFrom, setDoubleDamagefrom] = useState([]);
-
+function WeaknessGrid({ damageRelations }) {
+  const [doubleDamageFrom, setDoubleDamageFrom] = useState([]);
+  console.log(doubleDamageFrom);
   useEffect(() => {
-    getTypeDetails(type).then((response) => {
-      return setDoubleDamagefrom(response.damage_relations.double_damage_from);
-    });
-  }, [type]);
+    const dmgArr = [];
+    for (let type in damageRelations) {
+      if (damageRelations[type] === 2) {
+        dmgArr.push(type);
+      }
+    }
+    setDoubleDamageFrom(dmgArr);
+  }, [damageRelations]);
+
   return doubleDamageFrom.length > 0 ? (
     <>
       <>
-        <p>{type} takes double damage from:</p>
+        <p>takes 2x damage from:</p>
         <InteractionsGrid interaction={doubleDamageFrom}></InteractionsGrid>
       </>
     </>
