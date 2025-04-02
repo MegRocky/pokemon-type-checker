@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { getTypeDetails } from "../api";
-import TypeCard from "./TypeCard";
 import InteractionsGrid from "./InteractionsGrid";
 
 function ImmunityGrid({ immuneTo }) {
