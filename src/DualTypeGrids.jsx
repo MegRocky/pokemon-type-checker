@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
 import { getTypeDetails } from "../api";
 import InteractionsGrid from "./InteractionsGrid";
-import QuadDamageFromGrid from "./QuadDamageFromGrid";
-import QuarterDamageFromGrid from "./QuarterDamageFrom";
 
-function DualTypeGrids({ currentPokemonDetails }) {
+function DualTypeGrids({ currentPokemonDetails, damageRelations }) {
   return (
     <>
       <p>
@@ -17,12 +15,6 @@ function DualTypeGrids({ currentPokemonDetails }) {
       <img
         src={`src/assets/${currentPokemonDetails.types[1].type.name}.png`}
       ></img>
-      <QuadDamageFromGrid
-        currentPokemonDetails={currentPokemonDetails}
-      ></QuadDamageFromGrid>
-      <QuarterDamageFromGrid
-        currentPokemonDetails={currentPokemonDetails}
-      ></QuarterDamageFromGrid>
     </>
   );
 }

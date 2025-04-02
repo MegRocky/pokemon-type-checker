@@ -7,7 +7,7 @@ function InteractionsGrid({ interaction }) {
         <>
           <section className="type-grid">
             {interaction.map((type) => {
-              return <TypeCard typeName={type.name} key={type.name}></TypeCard>;
+              return <TypeCard typeName={type} key={type}></TypeCard>;
             })}
           </section>
         </>
