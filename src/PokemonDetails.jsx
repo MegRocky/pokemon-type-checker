@@ -33,12 +33,8 @@ function PokemonDetails({ currentPokemonDetails }) {
             }
           }
           for (let type of response.damage_relations.no_damage_from) {
-            if (type.name in relations) {
-              delete relations[type.name];
-              immunity.push(type.name);
-            } else {
-              immunity.push(type.name);
-            }
+            delete relations[type.name];
+            immunity.push(type.name);
           }
         })
         .then(() => {
@@ -56,9 +52,7 @@ function PokemonDetails({ currentPokemonDetails }) {
       {currentPokemonDetails.types.length === 1 ? (
         <>
           <p>{currentPokemonDetails.types[0].type.name} type </p>
-          <img
-            src={`src/assets/${currentPokemonDetails.types[0].type.name}.png`}
-          ></img>
+          <img src={`/${currentPokemonDetails.types[0].type.name}.png`}></img>
         </>
       ) : (
         <>
@@ -66,12 +60,8 @@ function PokemonDetails({ currentPokemonDetails }) {
             {currentPokemonDetails.types[0].type.name} and{" "}
             {currentPokemonDetails.types[1].type.name} type{" "}
           </p>
-          <img
-            src={`src/assets/${currentPokemonDetails.types[0].type.name}.png`}
-          ></img>{" "}
-          <img
-            src={`src/assets/${currentPokemonDetails.types[1].type.name}.png`}
-          ></img>
+          <img src={`/${currentPokemonDetails.types[0].type.name}.png`}></img>{" "}
+          <img src={`/${currentPokemonDetails.types[1].type.name}.png`}></img>
         </>
       )}
       <ImmunityGrid immuneTo={immuneTo}></ImmunityGrid>
