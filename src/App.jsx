@@ -27,6 +27,7 @@ function App() {
         <>
           <PokemonDetails
             currentPokemonDetails={currentPokemonDetails}
+            currentPokemonName={currentPokemonName}
           ></PokemonDetails>
         </>
       ) : (

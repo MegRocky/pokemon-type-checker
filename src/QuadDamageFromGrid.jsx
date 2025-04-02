@@ -1,13 +1,13 @@
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 import { getTypeDetails } from "../api";
 import InteractionsGrid from "./InteractionsGrid";
-function WeaknessGrid({ damageRelations }) {
-  const [doubleDamageFrom, setDoubleDamageFrom] = useState([]);
+function QuadDamageFromGrid({ damageRelations }) {
+  const [quadDamageFrom, setQuadDamageFrom] = useState([]);
   console.log(doubleDamageFrom);
   useEffect(() => {
     const dmgArr = [];
     for (let type in damageRelations) {
-      if (damageRelations[type] === 2) {
+      if (damageRelations[type] === 4) {
         dmgArr.push(type);
       }
     }
@@ -25,4 +25,4 @@ function WeaknessGrid({ damageRelations }) {
     <></>
   );
 }
-export default WeaknessGrid;
+export default QuadDamageFromGrid;
