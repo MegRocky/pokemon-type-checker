@@ -1,11 +1,10 @@
-import DualTypeGrids from "./DualTypeGrids";
 import HalfDamageFromGrid from "./HalfDamageFromGrid";
-import HalfDamageToGrid from "./HalfDamageToGrid";
 import ImmunityGrid from "./ImmunityGrid";
-import StrengthsGrid from "./StrengthsGrid";
 import WeaknessGrid from "./WeaknessGrid";
-import { useEffect, useState, useLayoutEffect } from "react";
+import { useEffect, useState } from "react";
 import { getTypeDetails } from "../api";
+import QuadDamageFromGrid from "./QuadDamageFromGrid";
+import QuarterDamageFromGrid from "./QuarterDamageFromGrid";
 
 function PokemonDetails({ currentPokemonDetails }) {
   const [damageRelations, setDamageRelatons] = useState({});
@@ -33,7 +32,7 @@ function PokemonDetails({ currentPokemonDetails }) {
               relations[type.name] = 2;
             }
           }
-          for (let type of response.damage_relations?.no_damage_from) {
+          for (let type of response.damage_relations.no_damage_from) {
             if (type.name in relations) {
               delete relations[type.name];
               immunity.push(type.name);
@@ -49,19 +48,22 @@ function PokemonDetails({ currentPokemonDetails }) {
           return setImmuneTo(immunity);
         });
     }
-  }, []);
+  }, [currentPokemonDetails]);
 
   return (
     <>
       <h3>{currentPokemonDetails.name}</h3>
       {currentPokemonDetails.types.length === 1 ? (
         <>
-          <p>is a {currentPokemonDetails.types[0].type.name} type </p>
+          <p>{currentPokemonDetails.types[0].type.name} type </p>
+          <img
+            src={`src/assets/${currentPokemonDetails.types[0].type.name}.png`}
+          ></img>
         </>
       ) : (
         <>
           <p>
-            is a {currentPokemonDetails.types[0].type.name} and{" "}
+            {currentPokemonDetails.types[0].type.name} and{" "}
             {currentPokemonDetails.types[1].type.name} type{" "}
           </p>
           <img
@@ -73,7 +75,13 @@ function PokemonDetails({ currentPokemonDetails }) {
         </>
       )}
       <ImmunityGrid immuneTo={immuneTo}></ImmunityGrid>
+      <QuadDamageFromGrid
+        damageRelations={damageRelations}
+      ></QuadDamageFromGrid>
       <WeaknessGrid damageRelations={damageRelations}></WeaknessGrid>
+      <QuarterDamageFromGrid
+        damageRelations={damageRelations}
+      ></QuarterDamageFromGrid>
       <HalfDamageFromGrid
         damageRelations={damageRelations}
       ></HalfDamageFromGrid>

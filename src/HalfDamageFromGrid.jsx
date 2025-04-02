@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
-import { getTypeDetails } from "../api";
-import TypeCard from "./TypeCard";
 import InteractionsGrid from "./InteractionsGrid";
 function HalfDamageFromGrid({ damageRelations }) {
   const [halfDamageFrom, setHalfDamageFrom] = useState([]);
-  console.log(halfDamageFrom);
   useEffect(() => {
     const dmgArr = [];
     for (let type in damageRelations) {
@@ -18,7 +15,7 @@ function HalfDamageFromGrid({ damageRelations }) {
   return halfDamageFrom.length > 0 ? (
     <>
       <>
-        <p>takes half damage from:</p>
+        <p>takes 1/2 damage from:</p>
         <InteractionsGrid interaction={halfDamageFrom}></InteractionsGrid>
       </>
     </>

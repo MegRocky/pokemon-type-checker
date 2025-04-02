@@ -1,5 +1,4 @@
-import { useEffect, useState, useLayoutEffect } from "react";
-import { getTypeDetails } from "../api";
+import { useEffect, useState } from "react";
 import InteractionsGrid from "./InteractionsGrid";
 function WeaknessGrid({ damageRelations }) {
   const [doubleDamageFrom, setDoubleDamageFrom] = useState([]);
@@ -17,7 +16,7 @@ function WeaknessGrid({ damageRelations }) {
   return doubleDamageFrom.length > 0 ? (
     <>
       <>
-        <p>takes double damage from:</p>
+        <p>takes 2x damage from:</p>
         <InteractionsGrid interaction={doubleDamageFrom}></InteractionsGrid>
       </>
     </>

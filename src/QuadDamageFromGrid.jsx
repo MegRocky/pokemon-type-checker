@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { getTypeDetails } from "../api";
+
 import InteractionsGrid from "./InteractionsGrid";
 function QuadDamageFromGrid({ damageRelations }) {
   const [quadDamageFrom, setQuadDamageFrom] = useState([]);
-  console.log(doubleDamageFrom);
+
   useEffect(() => {
     const dmgArr = [];
     for (let type in damageRelations) {
@@ -11,14 +11,14 @@ function QuadDamageFromGrid({ damageRelations }) {
         dmgArr.push(type);
       }
     }
-    setDoubleDamageFrom(dmgArr);
+    setQuadDamageFrom(dmgArr);
   }, [damageRelations]);
 
-  return doubleDamageFrom.length > 0 ? (
+  return quadDamageFrom.length > 0 ? (
     <>
       <>
-        <p>takes double damage from:</p>
-        <InteractionsGrid interaction={doubleDamageFrom}></InteractionsGrid>
+        <p>takes 4x damage from:</p>
+        <InteractionsGrid interaction={quadDamageFrom}></InteractionsGrid>
       </>
     </>
   ) : (
