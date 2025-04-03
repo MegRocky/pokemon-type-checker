@@ -10,38 +10,70 @@ function PokemonDetails({ currentPokemonDetails }) {
   const [damageRelations, setDamageRelatons] = useState({});
   const [immuneTo, setImmuneTo] = useState([]);
 
-  useEffect(() => {
+  function handleTypeDetails(response) {
     const relations = {};
     const immunity = [];
+    for (let entry of response) {
+      for (let type of entry.damage_relations?.half_damage_from) {
+        if (type.name in relations) {
+          relations[type.name] -= 2;
+        } else {
+          relations[type.name] = -2;
+        }
+      }
+      for (let type of entry.damage_relations?.double_damage_from) {
+        if (type.name in relations) {
+          relations[type.name] += 2;
+        } else {
+          relations[type.name] = 2;
+        }
+      }
+      for (let type of entry.damage_relations.no_damage_from) {
+        delete relations[type.name];
+        immunity.push(type.name);
+      }
+    }
+    return { relations, immunity };
+  }
 
-    for (let typ of currentPokemonDetails.types) {
-      const name = typ.type.name;
-      getTypeDetails(name)
+  useEffect(() => {
+    const typeDetailsArr = [];
+    if (currentPokemonDetails?.types.length > 1) {
+      getTypeDetails(currentPokemonDetails.types[0]?.type.name).then(
+        (response) => {
+          console.log(response);
+          typeDetailsArr.push(response);
+        }
+      );
+      getTypeDetails(currentPokemonDetails.types[1]?.type.name)
         .then((response) => {
-          for (let type of response.damage_relations?.half_damage_from) {
-            if (type.name in relations) {
-              relations[type.name] -= 2;
-            } else {
-              relations[type.name] = -2;
-            }
-          }
-          for (let type of response.damage_relations?.double_damage_from) {
-            if (type.name in relations) {
-              relations[type.name] += 2;
-            } else {
-              relations[type.name] = 2;
-            }
-          }
-          for (let type of response.damage_relations.no_damage_from) {
-            delete relations[type.name];
-            immunity.push(type.name);
-          }
+          console.log(response);
+          typeDetailsArr.push(response);
         })
         .then(() => {
-          return setDamageRelatons(relations);
+          console.log(typeDetailsArr);
+          return handleTypeDetails(typeDetailsArr);
+        })
+        .then(({ relations, immunity }) => {
+          setDamageRelatons(relations);
+          setImmuneTo(immunity);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      getTypeDetails(currentPokemonDetails.types[0]?.type.name)
+        .then((response) => {
+          console.log(response);
+          typeDetailsArr.push(response);
         })
         .then(() => {
-          return setImmuneTo(immunity);
+          console.log(typeDetailsArr);
+          return handleTypeDetails(typeDetailsArr);
+        })
+        .then(({ relations, immunity }) => {
+          setDamageRelatons(relations);
+          setImmuneTo(immunity);
         })
         .catch((err) => {
           console.log(err);

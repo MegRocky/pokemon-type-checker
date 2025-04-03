@@ -10,6 +10,7 @@ function App() {
   const [currentPokemonDetails, setCurrentPokemonDetails] = useState({});
   const [nameErr, setNameErr] = useState(false);
   useEffect(() => {
+    setNameErr(false);
     if (currentPokemonName.length > 0) {
       getPokemonDetails(currentPokemonName)
         .then((response) => {
