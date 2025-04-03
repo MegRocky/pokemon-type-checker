@@ -42,6 +42,9 @@ function PokemonDetails({ currentPokemonDetails }) {
         })
         .then(() => {
           return setImmuneTo(immunity);
+        })
+        .catch((err) => {
+          console.log(err);
         });
     }
   }, [currentPokemonDetails]);

@@ -8,12 +8,17 @@ import PokemonDetails from "./PokemonDetails";
 function App() {
   const [currentPokemonName, setCurrentPokemonName] = useState("");
   const [currentPokemonDetails, setCurrentPokemonDetails] = useState({});
-
+  const [nameErr, setNameErr] = useState(false);
   useEffect(() => {
     if (currentPokemonName.length > 0) {
-      getPokemonDetails(currentPokemonName).then((response) => {
-        setCurrentPokemonDetails(response);
-      });
+      getPokemonDetails(currentPokemonName)
+        .then((response) => {
+          setCurrentPokemonDetails(response);
+        })
+        .catch((err) => {
+          console.log(err);
+          setNameErr(true);
+        });
     }
   }, [currentPokemonName]);
 
@@ -23,6 +28,7 @@ function App() {
         setCurrentPokemonName={setCurrentPokemonName}
         currentPokemonName={currentPokemonName}
       ></NameSearch>
+      {nameErr ? <p>Please enter a valid pokemon name bestie</p> : ""}
       {currentPokemonDetails.name ? (
         <>
           <PokemonDetails
